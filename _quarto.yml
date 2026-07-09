@@ -2,6 +2,15 @@ project:
   type: website
 
 website:
+  title: "Taha Ziad"
+
+format:
+  html:
+    theme: cosmo
+    resources:
+      - resume.pdf
+
+website:
   title: "Scratching Post Interactive"
   navbar:
     left:
