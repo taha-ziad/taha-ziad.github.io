@@ -1,0 +1,6 @@
+---
+title: "Analyzing Economic Strategies in Professional Counter-Strike"
+format: html
+---
+
+<iframe src="cs-economy-report.pdf" width="100%" height="800px" style="border:none;"></iframe>

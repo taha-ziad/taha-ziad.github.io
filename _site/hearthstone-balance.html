@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Stats and Winrates - Undersanding Card Game Basics Through Visualiations – Scratching Post Interactive</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Scratching Post Interactive</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./hearthstone-balance.html" aria-current="page"> 
+<span class="menu-text">Hearthstone Balance</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cs-coordination.html"> 
+<span class="menu-text">CS Coordination (Code)</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./milestone1_report.html"> 
+<span class="menu-text">CS Coordination (Report)</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cs-economy-supervised.html"> 
+<span class="menu-text">CS Economy Supervised</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cs-economy-unsupervised.html"> 
+<span class="menu-text">CS Economy Unsupervised</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./milestone2_report.html"> 
+<span class="menu-text">CS Economy (Report)</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-this-data-set" id="toc-why-this-data-set" class="nav-link active" data-scroll-target="#why-this-data-set">Why this data set?</a></li>
+  <li><a href="#basics-of-hearthstone" id="toc-basics-of-hearthstone" class="nav-link" data-scroll-target="#basics-of-hearthstone">Basics of Hearthstone</a></li>
+  <li><a href="#about-this-data-set" id="toc-about-this-data-set" class="nav-link" data-scroll-target="#about-this-data-set">About this data set</a>
+  <ul class="collapse">
+  <li><a href="#visualization-techique" id="toc-visualization-techique" class="nav-link" data-scroll-target="#visualization-techique">Visualization Techique</a></li>
+  <li><a href="#visualization-library" id="toc-visualization-library" class="nav-link" data-scroll-target="#visualization-library">Visualization Library</a></li>
+  <li><a href="#load-data-from-github-and-check-the-first-few-rows" id="toc-load-data-from-github-and-check-the-first-few-rows" class="nav-link" data-scroll-target="#load-data-from-github-and-check-the-first-few-rows">load data from github and check the first few rows</a></li>
+  <li><a href="#lets-breakdown-the-meta-based-on-the-metris-weve-saved.-once-we-look-at-how-people-are-playing-the-game-well-break-down-these-separate-factors-into-our-final-scatter-to-make-some-deeper-connectnions." id="toc-lets-breakdown-the-meta-based-on-the-metris-weve-saved.-once-we-look-at-how-people-are-playing-the-game-well-break-down-these-separate-factors-into-our-final-scatter-to-make-some-deeper-connectnions." class="nav-link" data-scroll-target="#lets-breakdown-the-meta-based-on-the-metris-weve-saved.-once-we-look-at-how-people-are-playing-the-game-well-break-down-these-separate-factors-into-our-final-scatter-to-make-some-deeper-connectnions.">Let’s breakdown the meta based on the metris we’ve saved. Once we look at how people are playing the game, we’ll break down these separate factors into our final scatter to make some deeper connectnions.</a></li>
+  <li><a href="#lets-get-familiar-with-a-simple-scatterplot-and-look-if-we-can-see-anything-novel-right-away" id="toc-lets-get-familiar-with-a-simple-scatterplot-and-look-if-we-can-see-anything-novel-right-away" class="nav-link" data-scroll-target="#lets-get-familiar-with-a-simple-scatterplot-and-look-if-we-can-see-anything-novel-right-away">Let’s get familiar with a simple scatterplot and look if we can see anything novel right away</a></li>
+  <li><a href="#interesting-i-said-before-max-mana-is-10.-why-is-a-20-mana-minion-winning-let-alone-even-possible-to-play-well-lets-take-a-look-at-the-url-for-the-card-and-see." id="toc-interesting-i-said-before-max-mana-is-10.-why-is-a-20-mana-minion-winning-let-alone-even-possible-to-play-well-lets-take-a-look-at-the-url-for-the-card-and-see." class="nav-link" data-scroll-target="#interesting-i-said-before-max-mana-is-10.-why-is-a-20-mana-minion-winning-let-alone-even-possible-to-play-well-lets-take-a-look-at-the-url-for-the-card-and-see.">Interesting, I said before max mana is 10. Why is a 20 mana minion winning, let alone even possible to play? Well lets take a look at the url for the card and see….</a></li>
+  <li><a href="#lets-start-adding-interactivety.-cards-can-been-looked-at-by-various-values-so-lets-create-sliders-and-drop-downs-for-different-elements-and-see-if-we-can-pull-some-interesting-ideas." id="toc-lets-start-adding-interactivety.-cards-can-been-looked-at-by-various-values-so-lets-create-sliders-and-drop-downs-for-different-elements-and-see-if-we-can-pull-some-interesting-ideas." class="nav-link" data-scroll-target="#lets-start-adding-interactivety.-cards-can-been-looked-at-by-various-values-so-lets-create-sliders-and-drop-downs-for-different-elements-and-see-if-we-can-pull-some-interesting-ideas.">Let’s start adding interactivety. Cards can been looked at by various values, so lets create sliders and drop downs for different elements and see if we can pull some interesting ideas.</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Stats and Winrates - Undersanding Card Game Basics Through Visualiations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="32c53f12-2214-4c87-8d91-3e1c420ee954" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'png'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="why-this-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-data-set">Why this data set?</h2>
+<p>As far back as I can remember, I’ve been enthrawled with competition. For the majority of my life this passion has been fulfilled through sports such as soccer, but overtime when I couldn’t play, I would turn to video games to fill that desire. This has opened me up to a world of different competitive environments, and one which I found particularly novel was strategy games. Specifically I grew fancinated with Hearthstone, a online collectible card game from Blizzard Entertainment. <br> One aspect that actually motivated me to pursue a degree in data science was the statistical elements of card games. Inherently card games rely on the probability of drawing cards in a deck, as a result every component of the game revolves around the opportunity cost of picking a card for your deck, and the how you end up drawing it. Overtime websites have developed to track the influence of putting a card into your deck, and players have evolved to utilize these tools to assess the value of cards as they are played. I look to explore the nature of the cards themselves, and try to find insights into what sorts of elements of a card tend to lend itself to winning. <br></p>
+</section>
+<section id="basics-of-hearthstone" class="level2">
+<h2 class="anchored" data-anchor-id="basics-of-hearthstone">Basics of Hearthstone</h2>
+<p>Hearthston relies on a few fundamental rules that will be pertinent to the exploration further down: * Generally, cards can cost between 0-10 “Mana” to play * Mana is accrued once per turn, starting at 1, maxing out at 10 (on turn 2 you will have two mana) * A deck in hearthstone MUST have 30 cards * Some cards add additional cards at the start of game, but when creating a deck, the limit and minimum is 30 * You can only have two copies of a single card in a deck, unless it’s legendary rarity, in which case you can only have 1. * There are a few card types * Spells - Do something when played (deal, damage, draw cards) * Minions - Similar to spells, but come in the form of a unit which has attack and health. Max board space is 7 per player * There are few more but for this analysis I am only looking at minions, the most common card type. * There are 11 classes, some cards can only be played by a certain class, otherwise they are “Neutral” * Rogue, Mage, Paladin, Hunter, Demon Hunter, Warlock, Deathknight, Shaman, Druid, Priest</p>
+</section>
+<section id="about-this-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-data-set">About this data set</h2>
+<p>Unfortunately, as most video games are not open source, it can be hard to analyse data from them because places that aggregate it generally do so through less “official” means. As such finding a suitable data set that was relevant to the modern game was challenging. The following data set is card statisitics of every <strong>minion</strong> in Hearthstone as of January 2024. At this time the game has been out for about 10 years. The data set is not that large, and so I’ve attempted to include it with the Repo this notebook is associated with.</p>
+<section id="visualization-techique" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-techique">Visualization Techique</h3>
+<p>I knew I wanted to use a scatter plot because I was going to have a ton of categorical variables that influenced a range of possible continuous varibles. With the scope of many cards and their relevance to each other, I believed a Scatter with filterable interactive elements allowed the best cohesive view of the “meta” the game had. But additionally I wanted some general charts to show distribution of classes across various metrics so we could get a grasp for what types of decks were being played, before we look at the cards and their influence. A Pie chart is nice for class distribution because we can get a sense of the split among the classes. We’ll use the bars to look at the average variance in usage rate for class cards and finally we’ll use a box and whisker to see if there are some patterns for rarity and winning.</p>
+</section>
+<section id="visualization-library" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-library">Visualization Library</h3>
+<p>I chose Plotly because it’s easy to use, interactive, and works well with Jupyter Notebook. Plotly is open-source, created by Plotly, Inc., and can be installed with pip install plotly. It allows building detailed and interactive charts quickly, which helps explore data better. Since it integrates smoothly with Jupyter and offers more interactivity than libraries like Matplotlib or Seaborn. Plus similarly to many I wasn’t as familiar with it so I thought it a good time to use it.</p>
+</section>
+<section id="load-data-from-github-and-check-the-first-few-rows" class="level3">
+<h3 class="anchored" data-anchor-id="load-data-from-github-and-check-the-first-few-rows">load data from github and check the first few rows</h3>
+<div id="655f83eb-9653-48b1-85b8-dcc40ef6dd4d" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipywidgets <span class="im">as</span> wid</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, HBox, VBox</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#the data is pretty small so we should be able to load it from the github link</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/tahaz/521assignment3/main/hearthstone_minions.csv"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As you can see the data is pretty nice, but is in some awkward string forms which will need to be adjusted. Additionally, many fields which represent categorical variables have been converted to numbers, this data set didn’t provide much information as to what is labeled as what, so I will need to invesigate the data based on what I know about the game to determine for example, what class is “3”.</p>
+<div id="cc3d52ac-81fc-4dbe-b4b3-3b9dc800d091" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> basic_renaming(df):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># List of columns I want to see, we won't visualize all but I want some info if I want to see more about a particular card.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    columns_to_keep <span class="op">=</span> [<span class="st">'card_name'</span>, <span class="st">'in_perc_of_decks'</span>, <span class="st">'avg_copies'</span>, <span class="st">'deck_winrate'</span>, <span class="st">'times_played'</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'url'</span>, <span class="st">'CLASS'</span>, <span class="st">'RARITY'</span>, <span class="st">'COLLECTIBLE'</span>, <span class="st">'COST'</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HEALTH'</span>, <span class="st">'ATK'</span>, <span class="st">'BATTLECRY'</span>, <span class="st">'DISCOVER'</span>, <span class="st">'TAUNT'</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DEATHRATTLE'</span>, <span class="st">'FREEZE'</span>, <span class="st">'FORGE'</span>, <span class="st">'DIVINE_SHIELD'</span>, <span class="st">'TECH_LEVEL'</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CHARGE'</span>, <span class="st">'COMBO'</span>, <span class="st">'OVERLOAD'</span>, <span class="st">'REBORN'</span>, <span class="st">'RUSH'</span>, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DREDGE'</span>, <span class="st">'SPELLPOWER'</span>, <span class="st">'KABAL'</span>, <span class="st">'SECRET'</span>, <span class="st">'MAGNETIC'</span>, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'WINDFURY'</span>, <span class="st">'OUTCAST'</span>, <span class="st">'POISONOUS'</span>, <span class="st">'LIFESTEAL'</span>, <span class="st">'OVERKILL'</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CHOOSE_ONE'</span>, <span class="st">'INFUSE'</span>, <span class="st">'STEALTH'</span>, <span class="st">'TRADEABLE'</span>, <span class="st">'SILENCE'</span>, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'FRENZY'</span>, <span class="st">'SPELLBURST'</span>, <span class="st">'EVILZUG'</span>, <span class="st">'ADAPT'</span>, <span class="st">'INSPIRE'</span>, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ECHO'</span>, <span class="st">'HONORABLEKILL'</span>, <span class="st">'ENRAGED'</span>, <span class="st">'RECRUIT'</span>, <span class="st">'OVERHEAL'</span>, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SPARE_PART'</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename columns so they're easier to type</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[columns_to_keep].rename(columns<span class="op">=</span>{</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'card_name'</span>: <span class="st">'name'</span>, <span class="st">'in_perc_of_decks'</span>: <span class="st">'usage_rate'</span>, <span class="st">'avg_copies'</span>: <span class="st">'avg_copies'</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'deck_winrate'</span>: <span class="st">'deck_winrate'</span>, <span class="st">'times_played'</span>: <span class="st">'times_played'</span>, <span class="st">'url'</span>: <span class="st">'url'</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'CLASS'</span>: <span class="st">'class'</span>, <span class="st">'RARITY'</span>: <span class="st">'rarity'</span>, <span class="st">'COLLECTIBLE'</span>: <span class="st">'collectible'</span>, <span class="st">'COST'</span>: <span class="st">'cost'</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'HEALTH'</span>: <span class="st">'health'</span>, <span class="st">'ATK'</span>: <span class="st">'attack'</span>, <span class="st">'BATTLECRY'</span>: <span class="st">'battlecry'</span>, <span class="st">'DISCOVER'</span>: <span class="st">'discover'</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'TAUNT'</span>: <span class="st">'taunt'</span>, <span class="st">'DEATHRATTLE'</span>: <span class="st">'deathrattle'</span>, <span class="st">'FREEZE'</span>: <span class="st">'freeze'</span>, <span class="st">'FORGE'</span>: <span class="st">'forge'</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'DIVINE_SHIELD'</span>: <span class="st">'divine_shield'</span>, <span class="st">'TECH_LEVEL'</span>: <span class="st">'tech_level'</span>, <span class="st">'CHARGE'</span>: <span class="st">'charge'</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'COMBO'</span>: <span class="st">'combo'</span>, <span class="st">'OVERLOAD'</span>: <span class="st">'overload'</span>, <span class="st">'REBORN'</span>: <span class="st">'reborn'</span>, <span class="st">'RUSH'</span>: <span class="st">'rush'</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'DREDGE'</span>: <span class="st">'dredge'</span>, <span class="st">'SPELLPOWER'</span>: <span class="st">'spellpower'</span>, <span class="st">'KABAL'</span>: <span class="st">'kabal'</span>, <span class="st">'SECRET'</span>: <span class="st">'secret'</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'MAGNETIC'</span>: <span class="st">'magnetic'</span>, <span class="st">'WINDFURY'</span>: <span class="st">'windfury'</span>, <span class="st">'OUTCAST'</span>: <span class="st">'outcast'</span>, <span class="st">'POISONOUS'</span>: <span class="st">'poisonous'</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'LIFESTEAL'</span>: <span class="st">'lifesteal'</span>, <span class="st">'OVERKILL'</span>: <span class="st">'overkill'</span>, <span class="st">'CHOOSE_ONE'</span>: <span class="st">'choose_one'</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'INFUSE'</span>: <span class="st">'infuse'</span>, <span class="st">'STEALTH'</span>: <span class="st">'stealth'</span>, <span class="st">'TRADEABLE'</span>: <span class="st">'tradeable'</span>, <span class="st">'SILENCE'</span>: <span class="st">'silence'</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'FRENZY'</span>: <span class="st">'frenzy'</span>, <span class="st">'SPELLBURST'</span>: <span class="st">'spellburst'</span>, <span class="st">'EVILZUG'</span>: <span class="st">'evilzug'</span>, <span class="st">'ADAPT'</span>: <span class="st">'adapt'</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'INSPIRE'</span>: <span class="st">'inspire'</span>, <span class="st">'ECHO'</span>: <span class="st">'echo'</span>, <span class="st">'HONORABLEKILL'</span>: <span class="st">'honorable_kill'</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">'ENRAGED'</span>: <span class="st">'enraged'</span>, <span class="st">'RECRUIT'</span>: <span class="st">'recruit'</span>, <span class="st">'OVERHEAL'</span>: <span class="st">'overheal'</span>, <span class="st">'SPARE_PART'</span>: <span class="st">'spare_part'</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the url column links to an old wiki, but the urls are the same except the domain, lets replace it so we can see the cards</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'url'</span>] <span class="op">=</span> df[<span class="st">'url'</span>].<span class="bu">str</span>.replace(<span class="vs">r'fandom</span><span class="ch">\.</span><span class="vs">com'</span>, <span class="st">'wiki.gg'</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>basic_df <span class="op">=</span> basic_renaming(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="0bfab39f-9cf3-4a67-8f82-e677f2962d4c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_cards(df):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># replace invalid percentages with nan</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'usage_rate'</span>] <span class="op">=</span> df[<span class="st">'usage_rate'</span>].replace({<span class="st">'0%'</span>: <span class="va">None</span>, <span class="st">'-'</span>: <span class="va">None</span>})</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'deck_winrate'</span>] <span class="op">=</span> df[<span class="st">'deck_winrate'</span>].replace({<span class="st">'0%'</span>: <span class="va">None</span>, <span class="st">'-'</span>: <span class="va">None</span>})</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert percentages to decimal</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'usage_rate'</span>] <span class="op">=</span> df[<span class="st">'usage_rate'</span>].<span class="bu">str</span>.rstrip(<span class="st">'%'</span>).astype(<span class="bu">float</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'deck_winrate'</span>] <span class="op">=</span> df[<span class="st">'deck_winrate'</span>].<span class="bu">str</span>.rstrip(<span class="st">'%'</span>).astype(<span class="bu">float</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove commas and convert to int</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'times_played'</span>] <span class="op">=</span> df[<span class="st">'times_played'</span>].<span class="bu">str</span>.replace(<span class="st">','</span>, <span class="st">''</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale usage rate with log adjustment</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'adjusted_usage_rate'</span>] <span class="op">=</span> np.log1p(df[<span class="st">'usage_rate'</span>] <span class="op">*</span> <span class="dv">100</span>) <span class="op">**</span> <span class="fl">1.5</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out low play count</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">'times_played'</span>] <span class="op">&gt;=</span> <span class="dv">1000</span>]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>hearthstone_minions_df <span class="op">=</span> clean_cards(basic_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="f184f77e-96db-49ba-9ca1-ebf40419a967" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lets explore the categorical varibles which are now numbers to figure out what they mean, we'll write a function to return a sample of unique values and assess.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_examples(df, col_name):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    unique_vals <span class="op">=</span> df[col_name].dropna().unique()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> val <span class="kw">in</span> unique_vals:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        example <span class="op">=</span> df[df[col_name] <span class="op">==</span> val][[<span class="st">'name'</span>, <span class="st">'url'</span>, <span class="st">'class'</span>, <span class="st">'rarity'</span>, col_name]].head(<span class="dv">1</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>col_name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>val<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(example.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># replace rarity with anything you'd like to see unique values of...</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>print_examples(basic_df, <span class="st">'rarity'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>rarity: 5.0
+                name                                                    url  class  rarity  rarity
+E.T.C., Band Manager https://hearthstone.wiki.gg//wiki/E.T.C.,_Band_Manager   12.0     5.0     5.0
+--------------------------------------------------
+rarity: 1.0
+            name                                                url  class  rarity  rarity
+Kobold Librarian https://hearthstone.wiki.gg//wiki/Kobold_Librarian    9.0     1.0     1.0
+--------------------------------------------------
+rarity: 4.0
+     name                                         url  class  rarity  rarity
+Dirty Rat https://hearthstone.wiki.gg//wiki/Dirty_Rat   12.0     4.0     4.0
+--------------------------------------------------
+rarity: 3.0
+            name                                                url  class  rarity  rarity
+Coldlight Oracle https://hearthstone.wiki.gg//wiki/Coldlight_Oracle   12.0     3.0     3.0
+--------------------------------------------------
+rarity: 2.0
+            name                                                url  class  rarity  rarity
+Psychic Conjurer https://hearthstone.wiki.gg//wiki/Psychic_Conjurer    6.0     2.0     2.0
+--------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="031462c4-eba1-471b-ba74-02ac54da7d51" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the function above, you can replace the column name with whatever you want to investiate. </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use what we learn to create reference dictionaries so we can replace numbers with names if we'd like for labels and such.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rarityDict <span class="op">=</span> {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.0</span>: <span class="st">'Common'</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.0</span>: <span class="st">'Base'</span>, <span class="co"># &lt;- I didn't even know this existed, these are cards just given to the player in the base set challenges and have no rarity</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0</span>: <span class="st">'Rare'</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">4.0</span>: <span class="st">'Epic'</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">5.0</span>: <span class="st">'Legendary'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>classDict <span class="op">=</span> {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.0</span>: <span class="st">'Death Knight'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.0</span>: <span class="st">'Druid'</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.0</span>: <span class="st">'Hunter'</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">4.0</span>: <span class="st">'Mage'</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">5.0</span>: <span class="st">'Paladin'</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">6.0</span>: <span class="st">'Priest'</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">7.0</span>: <span class="st">'Rogue'</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="fl">8.0</span>: <span class="st">'Shaman'</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="fl">9.0</span>: <span class="st">'Warlock'</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fl">10.0</span>: <span class="st">'Warrior'</span>,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">12.0</span>: <span class="st">'Neutral'</span>,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">14.0</span>: <span class="st">'Demon Hunter'</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># lets also define custom colors for class</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>class_colors <span class="op">=</span> {</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Death Knight'</span>: <span class="st">'gray'</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Druid'</span>: <span class="st">'brown'</span>,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Hunter'</span>: <span class="st">'green'</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Mage'</span>: <span class="st">'blue'</span>,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Paladin'</span>: <span class="st">'yellow'</span>,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Priest'</span>: <span class="st">'white'</span>,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Rogue'</span>: <span class="st">'black'</span>,</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Shaman'</span>: <span class="st">'darkblue'</span>,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Warlock'</span>: <span class="st">'purple'</span>,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Warrior'</span>: <span class="st">'red'</span>,</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Neutral'</span>: <span class="st">'orange'</span>,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Demon Hunter'</span>: <span class="st">'darkgreen'</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co"># and custom shapes for rarity</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>rarity_shapes <span class="op">=</span> {</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Common'</span>: <span class="st">'circle'</span>,</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Rare'</span>: <span class="st">'diamond'</span>,</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Epic'</span>: <span class="st">'square'</span>,</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Legendary'</span>: <span class="st">'triangle-up'</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Map class numbers to class names</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>hearthstone_minions_df[<span class="st">'class_name'</span>] <span class="op">=</span> hearthstone_minions_df[<span class="st">'class'</span>].<span class="bu">map</span>(classDict)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>hearthstone_minions_df[<span class="st">'rarity_name'</span>] <span class="op">=</span> hearthstone_minions_df[<span class="st">'rarity'</span>].<span class="bu">map</span>(rarityDict)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lets-breakdown-the-meta-based-on-the-metris-weve-saved.-once-we-look-at-how-people-are-playing-the-game-well-break-down-these-separate-factors-into-our-final-scatter-to-make-some-deeper-connectnions." class="level3">
+<h3 class="anchored" data-anchor-id="lets-breakdown-the-meta-based-on-the-metris-weve-saved.-once-we-look-at-how-people-are-playing-the-game-well-break-down-these-separate-factors-into-our-final-scatter-to-make-some-deeper-connectnions.">Let’s breakdown the meta based on the metris we’ve saved. Once we look at how people are playing the game, we’ll break down these separate factors into our final scatter to make some deeper connectnions.</h3>
+<div id="95ae235f-644f-4c42-851d-390d5a5322bf" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar chart: Average Adjusted Usage Rate by Class</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>avg_class <span class="op">=</span> hearthstone_minions_df.groupby(<span class="st">'class_name'</span>)[<span class="st">'adjusted_usage_rate'</span>].mean().reset_index()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>fig_avg_class <span class="op">=</span> px.bar(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    avg_class,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'adjusted_usage_rate'</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Average Adjusted Usage Rate by Class'</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'adjusted_usage_rate'</span>: <span class="st">'Average Adjusted Usage Rate'</span>, <span class="st">'class_name'</span>: <span class="st">'Class'</span>},</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_dark'</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>class_colors</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>fig_avg_class.update_traces(marker<span class="op">=</span><span class="bu">dict</span>(line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">1</span>)))</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>fig_avg_class.show()</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot: Adjusted Usage Rate by Rarity</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>fig_rarity_box <span class="op">=</span> px.box(</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    hearthstone_minions_df,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'rarity_name'</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'adjusted_usage_rate'</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'rarity_name'</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Adjusted Usage Rate Distribution by Rarity'</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'adjusted_usage_rate'</span>: <span class="st">'Adjusted Usage Rate'</span>, <span class="st">'rarity_name'</span>: <span class="st">'Rarity'</span>},</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_dark'</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>fig_rarity_box.update_traces(marker<span class="op">=</span><span class="bu">dict</span>(line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">1</span>)))</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>fig_rarity_box.show()</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Pie chart: Proportion of Cards by Class</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>fig_class_pie <span class="op">=</span> px.pie(</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    hearthstone_minions_df,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    names<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Proportion of Cards by Class'</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_dark'</span>,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>class_colors,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    hole<span class="op">=</span><span class="fl">0.3</span>  <span class="co"># Slight donut effect for readability</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>fig_class_pie.update_traces(textinfo<span class="op">=</span><span class="st">'percent+label'</span>, marker<span class="op">=</span><span class="bu">dict</span>(line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">1</span>)))</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>fig_class_pie.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hearthstone-balance_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hearthstone-balance_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hearthstone-balance_files/figure-html/cell-8-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lets-get-familiar-with-a-simple-scatterplot-and-look-if-we-can-see-anything-novel-right-away" class="level3">
+<h3 class="anchored" data-anchor-id="lets-get-familiar-with-a-simple-scatterplot-and-look-if-we-can-see-anything-novel-right-away">Let’s get familiar with a simple scatterplot and look if we can see anything novel right away</h3>
+<div id="da4a9a71-8961-4c6a-b599-db9e3a2abca4" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plotly_scatter(df, col_name, classDict):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        df,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'deck_winrate'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span>col_name,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        size<span class="op">=</span><span class="st">'usage_rate'</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'rarity_name'</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        color_discrete_sequence<span class="op">=</span>px.colors.qualitative.Set1,  <span class="co">#we will match the colors to their in game color as best we can later</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>col_name<span class="sc">}</span><span class="ss"> vs Deck Winrate (Dot Size by Usage Rate, Color by Class)'</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>{<span class="st">'class_name'</span>: <span class="st">'Class'</span>},</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        opacity<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    fig.update_traces(marker<span class="op">=</span><span class="bu">dict</span>(sizemode<span class="op">=</span><span class="st">'area'</span>, sizeref<span class="op">=</span><span class="fl">2.</span> <span class="op">*</span> <span class="bu">max</span>(df[<span class="st">'usage_rate'</span>]) <span class="op">/</span> (<span class="fl">40.</span><span class="op">**</span><span class="dv">2</span>)))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Deck Winrate'</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span>col_name</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    fig.show()</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plotly_scatter(hearthstone_minions_df, <span class="st">'cost'</span>, classDict)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hearthstone-balance_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interesting-i-said-before-max-mana-is-10.-why-is-a-20-mana-minion-winning-let-alone-even-possible-to-play-well-lets-take-a-look-at-the-url-for-the-card-and-see." class="level3">
+<h3 class="anchored" data-anchor-id="interesting-i-said-before-max-mana-is-10.-why-is-a-20-mana-minion-winning-let-alone-even-possible-to-play-well-lets-take-a-look-at-the-url-for-the-card-and-see.">Interesting, I said before max mana is 10. Why is a 20 mana minion winning, let alone even possible to play? Well lets take a look at the url for the card and see….</h3>
+<div id="d8b94811-c62b-4691-be19-9b7021480895" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>url_20_mana <span class="op">=</span> hearthstone_minions_df.loc[hearthstone_minions_df[<span class="st">'cost'</span>] <span class="op">==</span> <span class="dv">20</span>, <span class="st">'url'</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(url_20_mana)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>https://hearthstone.wiki.gg//wiki/Molten_Giant</code></pre>
+</div>
+</div>
+<section id="ahh-so-if-you-clicked-the-link-youll-see-the-minion-starts-at-20-mana-and-drops-based-on-lost-life." class="level4">
+<h4 class="anchored" data-anchor-id="ahh-so-if-you-clicked-the-link-youll-see-the-minion-starts-at-20-mana-and-drops-based-on-lost-life.">Ahh so if you clicked the link you’ll see the minion starts at 20 mana, and drops based on lost life.</h4>
+<div id="46c9787a-7715-406f-a45b-b5e27146275d" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> url_from_name(card_name):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> card_name.replace(<span class="st">" "</span>, <span class="st">"_"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    image_url <span class="op">=</span> <span class="ss">f"https://hearthstone.wiki.gg/wiki/Special:FilePath/</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.png"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(image_url)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>Image(url<span class="op">=</span>url_from_name(hearthstone_minions_df.loc[hearthstone_minions_df[<span class="st">'cost'</span>] <span class="op">==</span> <span class="dv">20</span>, <span class="st">'name'</span>].iloc[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<img src="https://hearthstone.wiki.gg/wiki/Special:FilePath/Molten_Giant.png">
+</div>
+</div>
+</section>
+</section>
+<section id="lets-start-adding-interactivety.-cards-can-been-looked-at-by-various-values-so-lets-create-sliders-and-drop-downs-for-different-elements-and-see-if-we-can-pull-some-interesting-ideas." class="level3">
+<h3 class="anchored" data-anchor-id="lets-start-adding-interactivety.-cards-can-been-looked-at-by-various-values-so-lets-create-sliders-and-drop-downs-for-different-elements-and-see-if-we-can-pull-some-interesting-ideas.">Let’s start adding interactivety. Cards can been looked at by various values, so lets create sliders and drop downs for different elements and see if we can pull some interesting ideas.</h3>
+<section id="well-add-interaction-for-the-following-metrics-to-adjust-the-plot" class="level4">
+<h4 class="anchored" data-anchor-id="well-add-interaction-for-the-following-metrics-to-adjust-the-plot">We’ll add interaction for the following metrics to adjust the plot</h4>
+<ul>
+<li>Rarity</li>
+<li>Class</li>
+<li>Cost</li>
+<li>Attack</li>
+<li>Health</li>
+<li>Charge</li>
+</ul>
+<section id="charge-is-a-simple-keyword-but-its-extremely-powerful.-in-hearthstone-you-only-act-on-your-turn-as-a-result-players-dictact-what-their-minions-attack-not-what-they-block.-charge-allows-a-player-to-immediately-attack-when-a-minion-is-played-unlike-a-normal-card-which-needs-to-rest-until-the-following-turn.-as-a-result-in-history-this-has-been-an-extremely-powerful-effect-but-theyve-slowed-withered-down-the-usage-so-im-curious-if-any-powerful-charge-minions-still-existed-when-this-data-was-put-together." class="level5">
+<h5 class="anchored" data-anchor-id="charge-is-a-simple-keyword-but-its-extremely-powerful.-in-hearthstone-you-only-act-on-your-turn-as-a-result-players-dictact-what-their-minions-attack-not-what-they-block.-charge-allows-a-player-to-immediately-attack-when-a-minion-is-played-unlike-a-normal-card-which-needs-to-rest-until-the-following-turn.-as-a-result-in-history-this-has-been-an-extremely-powerful-effect-but-theyve-slowed-withered-down-the-usage-so-im-curious-if-any-powerful-charge-minions-still-existed-when-this-data-was-put-together."><em>Charge is a simple keyword, but it’s extremely powerful. In Hearthstone you only act on your turn, as a result players dictact what their minions attack, not what they block. Charge allows a player to immediately attack when a minion is played, unlike a normal card which needs to rest until the following turn. As a result in history this has been an extremely powerful effect, but they’ve slowed withered down the usage so I’m curious if any powerful charge minions still existed when this data was put together.</em></h5>
+<div id="b7083a83-e8a5-4c09-b5e1-19e9c8bccd77" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'png'</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Map class and rarity to the dataframe</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>hearthstone_minions_df[<span class="st">'class_name'</span>] <span class="op">=</span> hearthstone_minions_df[<span class="st">'class'</span>].<span class="bu">map</span>(classDict)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>hearthstone_minions_df[<span class="st">'rarity_name'</span>] <span class="op">=</span> hearthstone_minions_df[<span class="st">'rarity'</span>].<span class="bu">map</span>(rarityDict)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Default filter values</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>default_rarity <span class="op">=</span> <span class="bu">list</span>(rarityDict.values())</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>default_class <span class="op">=</span> <span class="bu">list</span>(classDict.values())</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>default_cost <span class="op">=</span> [hearthstone_minions_df[<span class="st">'cost'</span>].dropna().<span class="bu">min</span>(), hearthstone_minions_df[<span class="st">'cost'</span>].dropna().<span class="bu">max</span>()]</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>default_attack <span class="op">=</span> [hearthstone_minions_df[<span class="st">'attack'</span>].dropna().<span class="bu">min</span>(), hearthstone_minions_df[<span class="st">'attack'</span>].dropna().<span class="bu">max</span>()]</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>default_health <span class="op">=</span> [hearthstone_minions_df[<span class="st">'health'</span>].dropna().<span class="bu">min</span>(), hearthstone_minions_df[<span class="st">'health'</span>].dropna().<span class="bu">max</span>()]</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>default_charge <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to filter and plot based on default values</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_and_plot(rarity, class_name, cost, attack, health, charge):</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter df by rarity, class, cost, attack, and health</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    df_filtered <span class="op">=</span> hearthstone_minions_df[</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        (hearthstone_minions_df[<span class="st">'rarity_name'</span>].isin(rarity)) <span class="op">&amp;</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        (hearthstone_minions_df[<span class="st">'class_name'</span>].isin(class_name)) <span class="op">&amp;</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        (hearthstone_minions_df[<span class="st">'cost'</span>].between(cost[<span class="dv">0</span>], cost[<span class="dv">1</span>])) <span class="op">&amp;</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        (hearthstone_minions_df[<span class="st">'attack'</span>].between(attack[<span class="dv">0</span>], attack[<span class="dv">1</span>])) <span class="op">&amp;</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        (hearthstone_minions_df[<span class="st">'health'</span>].between(health[<span class="dv">0</span>], health[<span class="dv">1</span>]))</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply charge filter if selected</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> charge <span class="op">==</span> <span class="fl">1.0</span>:</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        df_filtered <span class="op">=</span> df_filtered[df_filtered[<span class="st">'charge'</span>] <span class="op">==</span> <span class="fl">1.0</span>]</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> charge <span class="op">==</span> <span class="st">'nan'</span>:</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        df_filtered <span class="op">=</span> df_filtered[df_filtered[<span class="st">'charge'</span>].isna()]</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format winrate and usage rate as percentages</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    df_filtered[<span class="st">'deck_winrate_pct'</span>] <span class="op">=</span> (df_filtered[<span class="st">'deck_winrate'</span>] <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">1</span>).astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'%'</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    df_filtered[<span class="st">'usage_rate_pct'</span>] <span class="op">=</span> (df_filtered[<span class="st">'usage_rate'</span>] <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">1</span>).astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">'%'</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create scatter plot with class and rarity</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter(</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        df_filtered,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'deck_winrate'</span>,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'adjusted_usage_rate'</span>,</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        size<span class="op">=</span><span class="st">'usage_rate'</span>,</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        symbol<span class="op">=</span><span class="st">'rarity_name'</span>,</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        hover_data<span class="op">=</span>{</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="va">True</span>,</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">'class_name'</span>: <span class="va">True</span>,</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">'rarity_name'</span>: <span class="va">True</span>,</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">'deck_winrate_pct'</span>: <span class="va">True</span>,</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">'usage_rate_pct'</span>: <span class="va">True</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>        color_discrete_map<span class="op">=</span>class_colors,</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>        symbol_map<span class="op">=</span>rarity_shapes,</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">'Filtered Hearthstone Cards (Size by Usage Rate, Shape by Rarity, Color by Class)'</span>,</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>{<span class="st">'rarity_name'</span>: <span class="st">'Rarity'</span>, <span class="st">'class_name'</span>: <span class="st">'Class'</span>},</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        template<span class="op">=</span><span class="st">'plotly_dark'</span>  <span class="co"># dark mode</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Customize hover information</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    fig.update_traces(</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        hovertemplate<span class="op">=</span><span class="st">'&lt;b&gt;%</span><span class="sc">{customdata[0]}</span><span class="st">&lt;/b&gt;&lt;br&gt;'</span> <span class="op">+</span>  <span class="co"># name</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'Class: %</span><span class="sc">{customdata[1]}</span><span class="st">&lt;br&gt;'</span> <span class="op">+</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'Rarity: %</span><span class="sc">{customdata[2]}</span><span class="st">&lt;br&gt;'</span> <span class="op">+</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'Winrate: %</span><span class="sc">{customdata[3]}</span><span class="st">&lt;br&gt;'</span> <span class="op">+</span></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'Usage Rate: %</span><span class="sc">{customdata[4]}</span><span class="st">&lt;extra&gt;&lt;/extra&gt;'</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove auto-generated legends by px.scatter</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    fig.for_each_trace(<span class="kw">lambda</span> t: t.update(showlegend<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add shape legend for rarity</span></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> rarity, shape <span class="kw">in</span> rarity_shapes.items():</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(</span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>            go.Scatter(</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span>[<span class="va">None</span>],</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>[<span class="va">None</span>],</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>                mode<span class="op">=</span><span class="st">'markers'</span>,</span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="bu">dict</span>(symbol<span class="op">=</span>shape, size<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">'white'</span>, line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">2</span>)),</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="ss">f'Rarity: </span><span class="sc">{</span>rarity<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>                legendgroup<span class="op">=</span><span class="st">"rarity_group"</span>,</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>                showlegend<span class="op">=</span><span class="va">True</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add color legend for class</span></span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> class_name, color <span class="kw">in</span> class_colors.items():</span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(</span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>            go.Scatter(</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span>[<span class="va">None</span>],</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>[<span class="va">None</span>],</span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>                mode<span class="op">=</span><span class="st">'markers'</span>,</span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span>color, line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">1</span>)),</span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="ss">f'Class: </span><span class="sc">{</span>class_name<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>                legendgroup<span class="op">=</span><span class="st">"class_group"</span>,</span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>                showlegend<span class="op">=</span><span class="va">True</span></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update marker and layout options</span></span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>    fig.update_traces(</span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>        marker<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>            sizemode<span class="op">=</span><span class="st">'area'</span>,</span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a>            sizeref<span class="op">=</span><span class="fl">2.</span> <span class="op">*</span> <span class="bu">max</span>(hearthstone_minions_df[<span class="st">'usage_rate'</span>]) <span class="op">/</span> (<span class="fl">40.</span><span class="op">**</span><span class="dv">2</span>),</span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>, width<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>            opacity<span class="op">=</span><span class="fl">0.8</span></span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>    )        </span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Deck Winrate'</span>,</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">'Log Adjusted Usage Rate'</span>,</span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a>        legend_title_text<span class="op">=</span><span class="st">'Legend'</span>,</span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>        plot_bgcolor<span class="op">=</span><span class="st">'#1E1E1E'</span>,  <span class="co"># dark background</span></span>
+<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a>        paper_bgcolor<span class="op">=</span><span class="st">'#1E1E1E'</span>,</span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>        font<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'white'</span>),</span>
+<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>        xaxis<span class="op">=</span><span class="bu">dict</span>(gridcolor<span class="op">=</span><span class="st">'white'</span>, tickformat<span class="op">=</span><span class="st">'.1%'</span>),</span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>        yaxis<span class="op">=</span><span class="bu">dict</span>(gridcolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the plot as an image in the notebook</span></span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a>    img_bytes <span class="op">=</span> fig.to_image(<span class="bu">format</span><span class="op">=</span><span class="st">"png"</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a>    display(Image(img_bytes))</span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Run filter_and_plot with default values</span></span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a>filter_and_plot(</span>
+<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a>    default_rarity,</span>
+<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a>    default_class,</span>
+<span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a>    default_cost,</span>
+<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a>    default_attack,</span>
+<span id="cb13-134"><a href="#cb13-134" aria-hidden="true" tabindex="-1"></a>    default_health,</span>
+<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a>    default_charge</span>
+<span id="cb13-136"><a href="#cb13-136" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hearthstone-balance_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="conclusions">Conclusions</h3>
+<p>So at the end of the day we can see the game is decently balanced, but there’s a catch… At the start of this story I mentioned video games being great resources for data exploration but one caveat of this is that most players are all single focused in these competitive types of games. Players WANT to <strong>win</strong> and this simple fact heavily skews what data you can gather from players. The best players will play with the best cards in the best decks, further cementing their winrates and usage as the meta developes. It’s very important when looking at data from games to consider the types of players you have, and what influence that has over the game and the data it returns.</p>
+<p>In Hearthstone that means maybe even singling out unique players and their habits and considering these anomalies worthwhile to view. The average player is going to be well…average, and so considering your game as a whole might not be the right approach. We might see Molten Giants winrate as a bit of a problem, but it’s cost in a game like Hearthstone revolves around the players health, something that is manipulated by both sides of the table. This interactivity is at the heart of game, and neutering good cards that promote this interactivity in my opinion defeats the point.</p>
+<p>Data in this age is the heart of many balance and design strategies, but the ephermal feeling of fun is what makes a good game. How we take this sort of exploration and tie it back into our games is a delicate balance. And this balancing act is why I got into this whole industry to begin with…</p>
+<p>Hope you enjoy playing around with the visuals, and if you played Hearthstone, what surprised you the most?</p>
+<section id="also-remember-when-i-said-charge-was-powerful-and-being-promoted-less-and-less-well-theres-only-one-card-in-this-data-that-still-maintained-that-tag-and-its-being-changed-for-2025can-you-find-it" class="level6">
+<h6 class="anchored" data-anchor-id="also-remember-when-i-said-charge-was-powerful-and-being-promoted-less-and-less-well-theres-only-one-card-in-this-data-that-still-maintained-that-tag-and-its-being-changed-for-2025can-you-find-it"><em>also remember when I said charge was powerful and being promoted less and less, well there’s only one card in this data that still maintained that tag and it’s being changed for 2025…can you find it?</em></h6>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

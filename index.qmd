@@ -1,0 +1,26 @@
+---
+title: "Taha Ziad"
+image: profile.jpg
+about:
+  template: trestles
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/taha-ziad
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/your-profile-link
+    - icon: headphones
+      text: SoundCloud
+      href: https://soundcloud.com/ztaha
+    - icon: camera
+      text: VSCO
+      href: https://vsco.co/tahaziad/gallery
+    - icon: envelope
+      text: Email
+      href: mailto:your.email@example.com
+---
+
+Welcome to my site. I help people do more with the data they already have. I believe that statistics are subjective, context is everything, and even when it comes to data, less is often more. 
+
+A lot of my personal projects involve games. To me, the most important thing you can do with math is humanize people. In practice, that often means tackling problems without clear solutions to optimize harmony with our lives.

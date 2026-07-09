@@ -1,0 +1,26 @@
+{
+  "about.qmd": {
+    "about.html": "3e0afdb5"
+  },
+  "cs-coordination.ipynb": {
+    "cs-coordination.html": "90fbda9b"
+  },
+  "cs-economy-supervised.ipynb": {
+    "cs-economy-supervised.html": "9aee0ad8"
+  },
+  "cs-economy-unsupervised.ipynb": {
+    "cs-economy-unsupervised.html": "f77c21cf"
+  },
+  "hearthstone-balance.ipynb": {
+    "hearthstone-balance.html": "9a0a4d09"
+  },
+  "index.qmd": {
+    "index.html": "5fa3a4c7"
+  },
+  "milestone1_report.qmd": {
+    "milestone1_report.html": "13f13f9f"
+  },
+  "milestone2_report.qmd": {
+    "milestone2_report.html": "c05cadcf"
+  }
+}

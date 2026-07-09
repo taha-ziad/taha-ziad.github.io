@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "Scratching Post Interactive"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: hearthstone-balance.ipynb
+        text: Hearthstone Balance
+      - href: cs-coordination.ipynb
+        text: CS Coordination (Code)
+      - href: milestone1_report.qmd
+        text: CS Coordination (Report)
+      - href: cs-economy-supervised.ipynb
+        text: CS Economy Supervised
+      - href: cs-economy-unsupervised.ipynb
+        text: CS Economy Unsupervised
+      - href: milestone2_report.qmd
+        text: CS Economy (Report)
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true

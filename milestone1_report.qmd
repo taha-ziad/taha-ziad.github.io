@@ -1,0 +1,6 @@
+---
+title: "Coordination Vs Competency in Counter-Strike"
+format: html
+---
+
+<iframe src="cs-coordination-report.pdf" width="100%" height="800px" style="border:none;"></iframe>
