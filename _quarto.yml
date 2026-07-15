@@ -4,7 +4,7 @@ project:
 website:
   title: "Scratching Post Interactive"
   favicon: favicon.png
-      navbar:
+  navbar:
     left:
       - href: index.qmd
         text: Home
@@ -29,4 +29,3 @@ format:
       - resume.pdf
       - cs-economy-report.pdf
       - cs-coordination-report.pdf
-      
