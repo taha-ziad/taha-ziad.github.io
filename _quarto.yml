@@ -10,10 +10,8 @@ website:
         text: Home
       - href: hearthstone-balance.ipynb
         text: Hearthstone Balance
-      - href: milestone1_report.qmd
-        text: CS Coordination (Report)
-      - href: cs-coordination.ipynb
-        text: CS Coordination (Code)
+      - href: csprosjoes.qmd
+        text: CS Bros vs Pros
       - href: cs-economy.qmd
         text: Novelty in the CS Economy
 
@@ -22,6 +20,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    grid:
+      body-width: 1400px
+      margin-width: 300px
     resources:
       - resume.pdf
-      - cs-economy-report.pdf
