@@ -6,19 +6,27 @@ format:
     lightbox: true
 ---
 
-A collection of 35mm film photography. Click on any image to expand it in high resolution.
+A collection of 35mm film photography. Ordered generally by when I took them. 
 
 ## Gallery One
 
 ::: {layout-ncol=3}
 ![](<pictures/for_site (1).jpg>)
+
 ![](<pictures/for_site (2).jpg>)
+
 ![](<pictures/for_site (3).jpg>)
+
 ![](<pictures/for_site (4).jpg>)
+
 ![](<pictures/for_site (5).jpg>)
+
 ![](<pictures/for_site (6).jpg>)
+
 ![](<pictures/for_site (7).jpg>)
+
 ![](<pictures/for_site (8).jpg>)
+
 ![](<pictures/for_site (9).jpg>)
 :::
 
@@ -26,10 +34,15 @@ A collection of 35mm film photography. Click on any image to expand it in high r
 
 ::: {layout-ncol=2}
 ![](<pictures/for_site (10).jpg>)
+
 ![](<pictures/for_site (11).jpg>)
+
 ![](<pictures/for_site (12).jpg>)
+
 ![](<pictures/for_site (13).jpg>)
+
 ![](<pictures/for_site (14).jpg>)
+
 ![](<pictures/for_site (15).jpg>)
 :::
 
@@ -37,13 +50,21 @@ A collection of 35mm film photography. Click on any image to expand it in high r
 
 ::: {layout-ncol=3}
 ![](<pictures/for_site (16).jpg>)
+
 ![](<pictures/for_site (17).jpg>)
+
 ![](<pictures/for_site (18).jpg>)
+
 ![](<pictures/for_site (19).jpg>)
+
 ![](<pictures/for_site (20).jpg>)
+
 ![](<pictures/for_site (21).jpg>)
+
 ![](<pictures/for_site (22).jpg>)
+
 ![](<pictures/for_site (23).jpg>)
+
 ![](<pictures/for_site (24).jpg>)
 :::
 
@@ -51,9 +72,14 @@ A collection of 35mm film photography. Click on any image to expand it in high r
 
 ::: {layout-ncol=3}
 ![](<pictures/for_site (25).jpg>)
+
 ![](<pictures/for_site (26).jpg>)
+
 ![](<pictures/for_site (27).jpg>)
+
 ![](<pictures/for_site (28).jpg>)
+
 ![](<pictures/for_site (29).jpg>)
+
 ![](<pictures/for_site (30).jpg>)
 :::
