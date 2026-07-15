@@ -1,29 +1,31 @@
 ---
 title: "Taha Ziad"
-image: profile.jpg
-about:
-  template: trestles
-  links:
-    - icon: file-pdf
-      text: Resume
-      href: resume.pdf
-    - icon: github
-      text: GitHub
-      href: https://github.com/taha-ziad
-    - icon: headphones
-      text: SoundCloud
-      href: https://soundcloud.com/ztaha
-    - icon: camera
-      text: VSCO
-      href: https://vsco.co/tahaziad/gallery
-    - icon: envelope
-      text: Email
-      href: mailto:taha.ziad.business@gmail.com
 ---
 
-I think the best way to use Machine Learning is to leverage intuition to find elegant solutions. Above is a collection of rather simple projects that illustrate that solutions that are tangible exist for nebulous domains. 
-A lot of what I do is for games, they are easy to get data for and their abstractions make for good analogies that can translate to many other domains.
+:::: {.columns}
 
-I also make music and do a little film photography. 
+::: {.column width="45%"}
+![](profile.jpg){width=50% style="border-radius: 50%; margin-bottom: 15px;"}
+
+[<i class="bi bi-file-pdf"></i> Resume](resume.pdf) &nbsp;|&nbsp; [<i class="bi bi-github"></i> GitHub](https://github.com/taha-ziad) &nbsp;|&nbsp; [<i class="bi bi-headphones"></i> SoundCloud](https://soundcloud.com/ztaha) <br> [<i class="bi bi-camera"></i> VSCO](https://vsco.co/tahaziad/gallery) &nbsp;|&nbsp; [<i class="bi bi-envelope"></i> Email](mailto:taha.ziad.business@gmail.com)
+
+<br>
+
+I like Machine Learning. Always interested in growing my skills because I feel as a skill ML can be much simpler than it seems.
+I really enjoy working with people of differing backgrounds and working to combine our collective knowledge to make something interesting. 
+Statistics are subjective. 
 
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2331639830&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/ztaha" title="taha" target="_blank" style="color: #cccccc; text-decoration: none;">taha</a> · <a href="https://soundcloud.com/ztaha/train-track" title="Train Track" target="_blank" style="color: #cccccc; text-decoration: none;">Train Track</a></div>
+:::
+
+::: {.column width="5%"}
+<!-- Visual spacer between columns -->
+:::
+
+::: {.column width="50%"}
+### Hearthstone Balance
+```{=html}
+<iframe src="hearthstone-balance.html" width="100%" height="800px" style="border: 1px solid #e0e0e0; border-radius: 8px;"></iframe>
+:::
+
+::::
