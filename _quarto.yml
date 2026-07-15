@@ -4,7 +4,7 @@ project:
 website:
   title: "Scratching Post Interactive"
   favicon: favicon.png
-  navbar:
+      navbar:
     left:
       - href: index.qmd
         text: Home
@@ -14,6 +14,8 @@ website:
         text: CS Bros vs Pros
       - href: cs-economy.qmd
         text: Novelty in the CS Economy
+      - href: photography.qmd
+        text: Film Photography
 
 format:
   html:
@@ -27,3 +29,4 @@ format:
       - resume.pdf
       - cs-economy-report.pdf
       - cs-coordination-report.pdf
+      
