@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://scratchingpostinteractive.com/milestone2_report.html</loc>
-    <lastmod>2026-07-09T18:12:14.355Z</lastmod>
-  </url>
-  <url>
     <loc>https://scratchingpostinteractive.com/index.html</loc>
     <lastmod>2026-07-15T17:13:32.532Z</lastmod>
   </url>
   <url>
     <loc>https://scratchingpostinteractive.com/csprosjoes.html</loc>
-    <lastmod>2026-07-15T17:41:13.870Z</lastmod>
+    <lastmod>2026-07-15T18:05:36.027Z</lastmod>
   </url>
   <url>
     <loc>https://scratchingpostinteractive.com/cs-economy-unsupervised.html</loc>
@@ -21,23 +17,15 @@
     <lastmod>2026-07-09T18:12:14.342Z</lastmod>
   </url>
   <url>
-    <loc>https://scratchingpostinteractive.com/about.html</loc>
-    <lastmod>2026-07-09T18:12:14.321Z</lastmod>
-  </url>
-  <url>
     <loc>https://scratchingpostinteractive.com/cs-economy-supervised.html</loc>
     <lastmod>2026-07-09T18:12:14.345Z</lastmod>
   </url>
   <url>
     <loc>https://scratchingpostinteractive.com/cs-economy.html</loc>
-    <lastmod>2026-07-15T17:25:56.752Z</lastmod>
+    <lastmod>2026-07-15T18:00:54.731Z</lastmod>
   </url>
   <url>
     <loc>https://scratchingpostinteractive.com/hearthstone-balance.html</loc>
     <lastmod>2026-07-09T18:12:14.353Z</lastmod>
-  </url>
-  <url>
-    <loc>https://scratchingpostinteractive.com/milestone1_report.html</loc>
-    <lastmod>2026-07-09T18:12:14.355Z</lastmod>
   </url>
 </urlset>
