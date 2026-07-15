@@ -1,0 +1,30 @@
+﻿---
+title: "Counter-Strike Economy Analysis"
+format: 
+  html:
+    page-layout: full
+---
+
+This project analyzes the impact of economy management on professional Counter-Strike player win rates. You can explore the raw Python data models or view the final synthesized report using the tabs below.
+
+::: {.panel-tabset}
+
+## Supervised Model
+```{=html}
+<iframe src="cs-economy-supervised.html" width="100%" height="1000px" style="border: none; border-radius: 8px;"></iframe>
+```
+
+## Unsupervised Model
+```{=html}
+<iframe src="cs-economy-unsupervised.html" width="100%" height="1000px" style="border: none; border-radius: 8px;"></iframe>
+```
+
+## Final Report (PDF)
+<br>
+The final written report summarizing the methodology, insights, and conclusions of the economic data models. 
+
+<br>
+
+[<i class="bi bi-file-earmark-pdf-fill"></i> Read the Full PDF Report](cs-economy-report.pdf){.btn .btn-primary .btn-lg target="_blank"}
+
+:::
