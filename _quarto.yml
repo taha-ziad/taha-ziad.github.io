@@ -25,3 +25,5 @@ format:
       margin-width: 300px
     resources:
       - resume.pdf
+      - cs-economy-report.pdf
+      - cs-coordination-report.pdf
