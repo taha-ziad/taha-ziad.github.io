@@ -3,26 +3,23 @@ project:
 
 website:
   title: "Scratching Post Interactive"
+  favicon: favicon.png
   navbar:
     left:
       - href: index.qmd
         text: Home
       - href: hearthstone-balance.ipynb
         text: Hearthstone Balance
-      - href: cs-coordination.ipynb
-        text: CS Coordination (Code)
       - href: milestone1_report.qmd
         text: CS Coordination (Report)
-      - href: cs-economy-supervised.ipynb
-        text: CS Economy Supervised
-      - href: cs-economy-unsupervised.ipynb
-        text: CS Economy Unsupervised
-      - href: milestone2_report.qmd
-        text: CS Economy (Report)
+      - href: cs-coordination.ipynb
+        text: CS Coordination (Code)
+      - href: cs-economy.qmd
+        text: Novelty in the CS Economy
 
 format:
   html:
-    theme: vapor
+    theme: cosmo
     css: styles.css
     toc: true
     resources:
