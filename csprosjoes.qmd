@@ -1,0 +1,25 @@
+﻿---
+title: "Metagame Differences between Professional and Amateur"
+format: 
+  html:
+    page-layout: full
+---
+
+This projects aims to review online ranked matches and professional tiers of Counter-Strike gameplay. 
+
+::: {.panel-tabset}
+
+## Analysis Notebook
+```{=html}
+<iframe src="cs-coordination.html" width="100%" height="1000px" style="border: none; border-radius: 8px;"></iframe>
+```
+
+## Final Report (PDF)
+<br>
+The final written report summarizing the insights found in analyzing these skill ranges
+
+<br>
+
+[<i class="bi bi-file-earmark-pdf-fill"></i> Read the Full PDF Report](cs-coordination-report.pdf){.btn .btn-primary .btn-lg target="_blank"}
+
+:::
