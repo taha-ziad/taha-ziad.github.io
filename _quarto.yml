@@ -19,7 +19,7 @@ website:
 
 format:
   html:
-    theme: slate
+    theme: flatly
     css: styles.css
     toc: true
     grid:
