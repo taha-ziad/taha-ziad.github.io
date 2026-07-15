@@ -13,7 +13,7 @@ title: "Taha Ziad"
 
 I like Machine Learning. Always interested in growing my skills because I feel as a skill ML can be much simpler than it seems.
 I really enjoy working with people of differing backgrounds and working to combine our collective knowledge to make something interesting. 
-Statistics are subjective. 
+And remember, statistics are subjective :)
 
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2331639830&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/ztaha" title="taha" target="_blank" style="color: #cccccc; text-decoration: none;">taha</a> · <a href="https://soundcloud.com/ztaha/train-track" title="Train Track" target="_blank" style="color: #cccccc; text-decoration: none;">Train Track</a></div>
 :::
