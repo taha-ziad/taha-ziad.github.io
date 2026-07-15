@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://scratchingpostinteractive.com/index.html</loc>
-    <lastmod>2026-07-15T17:13:32.532Z</lastmod>
+    <loc>https://scratchingpostinteractive.com/photography.html</loc>
+    <lastmod>2026-07-15T18:40:44.855Z</lastmod>
   </url>
   <url>
-    <loc>https://scratchingpostinteractive.com/csprosjoes.html</loc>
-    <lastmod>2026-07-15T18:05:36.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://scratchingpostinteractive.com/cs-economy-unsupervised.html</loc>
-    <lastmod>2026-07-09T18:12:14.351Z</lastmod>
-  </url>
-  <url>
-    <loc>https://scratchingpostinteractive.com/cs-coordination.html</loc>
-    <lastmod>2026-07-09T18:12:14.342Z</lastmod>
-  </url>
-  <url>
-    <loc>https://scratchingpostinteractive.com/cs-economy-supervised.html</loc>
-    <lastmod>2026-07-09T18:12:14.345Z</lastmod>
+    <loc>https://scratchingpostinteractive.com/hearthstone-balance.html</loc>
+    <lastmod>2026-07-09T18:12:14.353Z</lastmod>
   </url>
   <url>
     <loc>https://scratchingpostinteractive.com/cs-economy.html</loc>
     <lastmod>2026-07-15T18:00:54.731Z</lastmod>
   </url>
   <url>
-    <loc>https://scratchingpostinteractive.com/hearthstone-balance.html</loc>
-    <lastmod>2026-07-09T18:12:14.353Z</lastmod>
+    <loc>https://scratchingpostinteractive.com/cs-economy-supervised.html</loc>
+    <lastmod>2026-07-09T18:12:14.345Z</lastmod>
+  </url>
+  <url>
+    <loc>https://scratchingpostinteractive.com/cs-coordination.html</loc>
+    <lastmod>2026-07-09T18:12:14.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://scratchingpostinteractive.com/cs-economy-unsupervised.html</loc>
+    <lastmod>2026-07-09T18:12:14.351Z</lastmod>
+  </url>
+  <url>
+    <loc>https://scratchingpostinteractive.com/csprosjoes.html</loc>
+    <lastmod>2026-07-15T18:05:36.027Z</lastmod>
+  </url>
+  <url>
+    <loc>https://scratchingpostinteractive.com/index.html</loc>
+    <lastmod>2026-07-15T17:13:32.532Z</lastmod>
   </url>
 </urlset>
