@@ -8,12 +8,14 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: resume.qmd
+        text: Resume
       - href: hearthstone-balance.ipynb
         text: Hearthstone Balance
       - href: csprosjoes.qmd
         text: CS Bros vs Pros
       - href: cs-economy.qmd
-        text: Novelty in the CS Economy
+        text: Finding Emergent Gameplay in CS
       - href: photography.qmd
         text: Film Photography
 
