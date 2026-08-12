@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://taha.quest/photography.html</loc>
-    <lastmod>2026-07-15T18:45:36.096Z</lastmod>
+    <loc>https://taha.quest/resume.html</loc>
+    <lastmod>2026-07-22T00:00:54.253Z</lastmod>
   </url>
   <url>
-    <loc>https://taha.quest/hearthstone-balance.html</loc>
-    <lastmod>2026-07-09T18:12:14.353Z</lastmod>
-  </url>
-  <url>
-    <loc>https://taha.quest/cs-economy.html</loc>
-    <lastmod>2026-07-15T18:00:54.731Z</lastmod>
-  </url>
-  <url>
-    <loc>https://taha.quest/cs-economy-supervised.html</loc>
-    <lastmod>2026-07-09T18:12:14.345Z</lastmod>
-  </url>
-  <url>
-    <loc>https://taha.quest/cs-coordination.html</loc>
-    <lastmod>2026-07-09T18:12:14.342Z</lastmod>
-  </url>
-  <url>
-    <loc>https://taha.quest/cs-economy-unsupervised.html</loc>
-    <lastmod>2026-07-09T18:12:14.351Z</lastmod>
+    <loc>https://taha.quest/index.html</loc>
+    <lastmod>2026-07-21T23:54:17.045Z</lastmod>
   </url>
   <url>
     <loc>https://taha.quest/csprosjoes.html</loc>
     <lastmod>2026-07-15T18:05:36.027Z</lastmod>
   </url>
   <url>
-    <loc>https://taha.quest/index.html</loc>
-    <lastmod>2026-07-15T19:13:24.717Z</lastmod>
+    <loc>https://taha.quest/cs-economy-unsupervised.html</loc>
+    <lastmod>2026-07-09T18:12:14.351Z</lastmod>
+  </url>
+  <url>
+    <loc>https://taha.quest/cs-coordination.html</loc>
+    <lastmod>2026-07-09T18:12:14.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://taha.quest/cs-economy-supervised.html</loc>
+    <lastmod>2026-07-09T18:12:14.345Z</lastmod>
+  </url>
+  <url>
+    <loc>https://taha.quest/cs-economy.html</loc>
+    <lastmod>2026-07-15T18:00:54.731Z</lastmod>
+  </url>
+  <url>
+    <loc>https://taha.quest/hearthstone-balance.html</loc>
+    <lastmod>2026-07-09T18:12:14.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://taha.quest/photography.html</loc>
+    <lastmod>2026-07-15T18:45:36.096Z</lastmod>
   </url>
 </urlset>
